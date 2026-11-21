@@ -8,7 +8,7 @@
     "userInterfaceStyle": "dark",
     "scheme": "emocamera",
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.hiranohiroyuki.emocamera",
       "buildNumber": "1",
       "infoPlist": {
