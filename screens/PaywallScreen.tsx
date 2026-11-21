@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { PurchasesPackage } from 'react-native-purchases';
 import { usePremiumStore } from '../store/usePremiumStore';
+
+const PRIVACY_POLICY_URL = 'https://hiroyu-07.github.io/emo-camera/privacy.html';
+const TERMS_OF_USE_URL = 'https://hiroyu-07.github.io/emo-camera/terms.html';
 
 export default function PaywallScreen({ onClose }: { onClose: () => void }) {
   const { offering, purchasePackage, restorePurchases, isLoading } = usePremiumStore();
@@ -108,6 +111,16 @@ export default function PaywallScreen({ onClose }: { onClose: () => void }) {
         <Pressable style={styles.restoreButton} onPress={handleRestore} disabled={busy}>
           <Text style={styles.restoreLabel}>購入を復元</Text>
         </Pressable>
+
+        <View style={styles.legalLinks}>
+          <Pressable onPress={() => Linking.openURL(TERMS_OF_USE_URL)}>
+            <Text style={styles.legalLinkLabel}>利用規約</Text>
+          </Pressable>
+          <Text style={styles.legalLinkSeparator}>・</Text>
+          <Pressable onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}>
+            <Text style={styles.legalLinkLabel}>プライバシーポリシー</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -258,5 +271,21 @@ const styles = StyleSheet.create({
   restoreLabel: {
     color: '#aaa',
     fontSize: 13,
+  },
+  legalLinks: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  legalLinkLabel: {
+    color: '#888',
+    fontSize: 12,
+    textDecorationLine: 'underline',
+  },
+  legalLinkSeparator: {
+    color: '#555',
+    fontSize: 12,
+    marginHorizontal: 8,
   },
 });
